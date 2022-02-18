@@ -2,6 +2,7 @@ package hello
 
 import (
 	"context"
+	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/reflection"
@@ -17,6 +18,8 @@ func NewHelloServer() *helloServer {
 }
 
 func (s *helloServer) SayHello(ctx context.Context, req *HelloRequest) (*HelloReply, error) {
+	fmt.Println("requested")
+	fmt.Println(req)
 	if req.Hey.GetMe() != nil {
 		return &HelloReply{
 			First:  "me",
