@@ -1,4 +1,4 @@
-#RUN
+# RUN
 
 go1.17, grpc, protoc 등의 환경 갖춰져있는지 확인
 
