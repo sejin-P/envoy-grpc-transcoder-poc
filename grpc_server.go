@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type helloServer struct {
@@ -21,6 +22,17 @@ func (s *helloServer) SayHello(ctx context.Context, req *HelloRequest) (*HelloRe
 	fmt.Println("requested")
 	fmt.Println(req)
 	if req.Hey.GetMe() != nil {
+		if req.GetTime() != nil {
+			fmt.Println(req.GetTime().AsTime())
+			return &HelloReply{
+				First:  "timetime",
+				Second: "timetime",
+				Time: &timestamppb.Timestamp{
+					Seconds: 1645517878,
+					Nanos:   200,
+				},
+			}, nil
+		}
 		return &HelloReply{
 			First:  "me",
 			Second: "me",
